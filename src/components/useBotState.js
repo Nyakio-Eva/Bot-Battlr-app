@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 
-const useBotState = ()=> {
+export const useBotState = ()=> {
     const [bots, setBots] = useState([]);
     const [army, setArmy] = useState([]);
 
@@ -9,8 +9,7 @@ const useBotState = ()=> {
         setArmy([...army, bot])
     }
 
-    return {bots, army, addToArmy};
+    return {bots, army, setBots, addToArmy};
 }
 
 
-export default useBotState;

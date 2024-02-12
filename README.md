@@ -33,6 +33,11 @@ This is a simple web application that lets you see profiles of bots in the Bot C
 ## Pseudo Code
 
 - Create a BotCollection component to display the list of bots profile(use pagination)
+   * use the useEffect hook to fetch bots data     (GET request) to http://localhost:3000/bots 
+   * use useState hook to update state in the component 
+   * update state by passing the array of bots to setBots
+   * display a list a bots profiles
+   * use pagination
 - create a MyBotArmy component to render individual bots selected by user
 - Implement functionality to:
     * add a bot to MyBotArmy component 

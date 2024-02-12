@@ -41,6 +41,10 @@ This is a simple web application that lets you see profiles of bots in the Bot C
 
 - create a MyBotArmy component to render 
 individual bots selected by user
+   * use custom hooks to manage shared state across BotCollection and MyBotArmy compnents
+   * create a new component to hold the custom hook = useStateBot.js
+   * This custom hook manages both bots and army variables and functions for useState
+   * it returns an object containing current values of bots and army variables along with addToArmy function.
 
 - Implement functionality to:
     * add a bot to MyBotArmy component 

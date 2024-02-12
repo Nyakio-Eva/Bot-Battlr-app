@@ -5,6 +5,7 @@ import React, {useEffect, useState} from "react";
 function BotCollection(){
 
     const [bots, setBots]= useState([]);
+    const [selectedBot, setSelectedBot]= useState(null);
 
     useEffect(() => {
         fetchBotsData();
@@ -19,8 +20,7 @@ function BotCollection(){
             }
             const data = await response.json();
             setBots(data)
-            console.log(data)
-            console.log(bots);
+            
 
         }catch(error){
             console.error('Error fetching bots:', error)
@@ -28,17 +28,39 @@ function BotCollection(){
         
     }
 
+    const handleViewProfile = (bot) => {
+        setSelectedBot(bot);
+    }
 
-
+    const handleCloseProfile = () => {
+        setSelectedBot(null);
+    }
 
     return(
         <div>
           <h1>Bot Collection</h1>
           <ul>
             {bots.map((bot) =>(
-                <li key={bot.id}>{bot.name}</li>
+                <li key={bot.id}>
+                    {bot.name}
+                    <button onClick={() => handleViewProfile(bot)}>view profile</button>
+                </li>
             ))}
           </ul>
+          {selectedBot && (
+                <div>
+                    <img src={selectedBot.avatar_url} alt={selectedBot.name} />
+                    <h4>{selectedBot.name}</h4>
+                    <p>Health: {selectedBot.health}</p>
+                    <p>Damage: {selectedBot.damage}</p>
+                    <p>Armor: {selectedBot.armor}</p>
+                    <p>Class: {selectedBot.bot_class}</p>
+                    <p>Catchphrase: {selectedBot.catchphrase}</p>
+                    <p>Created at: {selectedBot.created_at}</p>
+                    <p>Updated at: {selectedBot.updated_at}</p>
+                    <button onClick={handleCloseProfile}>Close Profile</button>
+                </div>
+            )}
         </div>
     )
 }

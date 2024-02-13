@@ -12,10 +12,7 @@ function BotCollection(){
     const [currentPage, setCurrentPage] = useState(1);
     const [postsPerPage] = useState(10);
 
-    const indexOfLastPost = currentPage * postsPerPage;
-    const indexOfFirstPost = indexOfLastPost - postsPerPage;
-    const currentPosts = bots.slice(indexOfFirstPost, indexOfLastPost);
-  
+    
   
 
     
@@ -77,45 +74,55 @@ function BotCollection(){
         setBots(updatedBots)
     }
     
-    const paginate = (pageNumber) => setCurrentPage(pageNumber)
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-    return(
-        <div className="container mt-5 ">
-          <h1 className="text-primary mb-3">Bot Collection</h1>
-          <ul className="list-group mb-4">
-            {bots.map((bot) =>(
-                <li key={bot.id} onClick={() => handleAddToYourBotArmy(bot)} >
-                    {bot.name} {currentPosts.length}
-                    
-                    <button onClick={(e) => {e.stopPropagation(); handleViewProfile(bot)}}>view profile</button>
-                     
-                   
-                </li>
-            ))}
-          </ul>
-          {selectedBot && (
-                <div>
-                    <img src={selectedBot.avatar_url} alt={selectedBot.name} />
-                    <h4>{selectedBot.name}</h4>
-                    <p>Health: {selectedBot.health}</p>
-                    <p>Damage: {selectedBot.damage}</p>
-                    <p>Armor: {selectedBot.armor}</p>
-                    <p>Class: {selectedBot.bot_class}</p>
-                    <p>Catchphrase: {selectedBot.catchphrase}</p>
-                    <p>Created at: {selectedBot.created_at}</p>
-                    <p>Updated at: {selectedBot.updated_at}</p>
-                    <button onClick={handleCloseProfile}>Close Profile</button>
+    const indexOfLastPost = currentPage * postsPerPage;
+    const indexOfFirstPost = indexOfLastPost - postsPerPage;
+    const currentPosts = bots.slice(indexOfFirstPost, indexOfLastPost);
+  
+
+
+    return (
+        <div className="container mt-5">
+            <div className="row">
+                <div className="col-md-8">
+                    <h1 className="text-primary mb-3">Bot Collection</h1>
+                    <ul className="list-group mb-4">
+                        {currentPosts.map((bot) => (
+                            <li className="d-flex justify-content-between align-items-center" key={bot.id} onClick={() => handleAddToYourBotArmy(bot)}>
+                                {bot.name}
+                                <button onClick={(e) => { e.stopPropagation(); handleViewProfile(bot); }}>view profile</button>
+                            </li>
+                        ))}
+                    </ul>
                 </div>
-            )}
-            <YourBotArmy army={army} setArmy={setArmy} onDeleteBot={(bot) => deleteBot(bot, handleDeleteBot)}/>
-            <Pagination 
-               postsPerPage={postsPerPage}
-               totalPosts ={bots.length}
-               paginate={paginate}
-               
-            />
+                <div className="col-md-4">
+                    {selectedBot && (
+                        <div>
+                            <img src={selectedBot.avatar_url} alt={selectedBot.name} />
+                            <h4>{selectedBot.name}</h4>
+                            <p>Health: {selectedBot.health}</p>
+                            <p>Damage: {selectedBot.damage}</p>
+                            <p>Armor: {selectedBot.armor}</p>
+                            <p>Class: {selectedBot.bot_class}</p>
+                            <p>Catchphrase: {selectedBot.catchphrase}</p>
+                            <p>Created at: {selectedBot.created_at}</p>
+                            <p>Updated at: {selectedBot.updated_at}</p>
+                            <button onClick={handleCloseProfile}>Close Profile</button>
+                        </div>
+                    )}
+                    <YourBotArmy army={army} setArmy={setArmy} onDeleteBot={(bot) => deleteBot(bot, handleDeleteBot)} />
+                    <Pagination
+                        postsPerPage={postsPerPage}
+                        totalPosts={bots.length}
+                        paginate={paginate}
+                    />
+                </div>
+            </div>
         </div>
-    )
+    );
+    
+    
 }
 
 export default BotCollection;

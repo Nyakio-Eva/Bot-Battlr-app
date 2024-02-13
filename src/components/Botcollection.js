@@ -84,7 +84,7 @@ function BotCollection(){
           <ul className="list-group mb-4">
             {bots.map((bot) =>(
                 <li key={bot.id} onClick={() => handleAddToYourBotArmy(bot)} >
-                    {bot.name} {currentPosts}
+                    {bot.name} {currentPosts.length}
                     
                     <button onClick={() => handleViewProfile(bot)}>view profile</button>
                      

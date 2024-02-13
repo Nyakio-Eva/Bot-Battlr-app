@@ -30,6 +30,23 @@ function BotCollection(){
         
     }
 
+    const deleteBot = async (bot, onDeleteBot) => {
+        try{
+            const response = await fetch(` http://localhost:3000/bots/${bot.id}`, {
+                method: "DELETE",
+            });
+
+            if(!response.ok){
+                throw new Error("failed to delete bot");
+            }
+            onDeleteBot(bot.id);
+
+        }catch(error){
+            console.error('Error deleting bot:', error);
+        }
+
+    }
+
     const handleViewProfile = (bot) => {
         setSelectedBot(bot);
     }
@@ -45,6 +62,11 @@ function BotCollection(){
       
     }
 
+    const handleDeleteBot = (deletedBot) => {
+        const updatedBots =  bots.filter((bot)=> bot.id !== deletedBot)
+        setBots(updatedBots)
+    }
+    
 
     return(
         <div>
@@ -74,7 +96,7 @@ function BotCollection(){
                     <button onClick={handleCloseProfile}>Close Profile</button>
                 </div>
             )}
-            <YourBotArmy army={army} setArmy={setArmy} />
+            <YourBotArmy army={army} setArmy={setArmy} onDeleteBot={(bot) => deleteBot(bot, handleDeleteBot)}/>
         </div>
     )
 }

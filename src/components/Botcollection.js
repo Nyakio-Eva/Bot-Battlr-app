@@ -1,11 +1,12 @@
 import React, {useEffect, useState} from "react";
-import {useBotState} from "./useBotState";
+import YourBotArmy from "./yourbotArmy";
 
 
 function BotCollection(){
 
-    const { bots, setBots, addToArmy }= useBotState();
+    const [bots, setBots] = useState([]);
     const [selectedBot, setSelectedBot]= useState(null);
+    const [army, setArmy] = useState([]);
 
     
     useEffect(() => {
@@ -37,8 +38,11 @@ function BotCollection(){
         setSelectedBot(null);
     }
 
-    const handleAddToArmy = (bot) =>{
-        addToArmy(bot);
+    const handleAddToYourBotArmy = (bot) => {
+       if(!army.find((armyBot)=> armyBot.id === bot.id)){
+           setArmy([...army, bot])
+       }
+      
     }
 
 
@@ -47,10 +51,12 @@ function BotCollection(){
           <h1>Bot Collection</h1>
           <ul>
             {bots.map((bot) =>(
-                <li key={bot.id}>
+                <li key={bot.id} onClick={() => handleAddToYourBotArmy(bot)} >
                     {bot.name}
+                    
                     <button onClick={() => handleViewProfile(bot)}>view profile</button>
-                    <button onClick={() => handleAddToArmy(bot)}>Add bot to your army</button>
+                     
+                   
                 </li>
             ))}
           </ul>
@@ -68,6 +74,7 @@ function BotCollection(){
                     <button onClick={handleCloseProfile}>Close Profile</button>
                 </div>
             )}
+            <YourBotArmy army={army} setArmy={setArmy} />
         </div>
     )
 }

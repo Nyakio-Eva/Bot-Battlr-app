@@ -1,17 +1,20 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './App.css';
 import BotCollection from './components/Botcollection';
-import MyBotArmy from './components/Mybotarmy';
+
 
 
 
 
 function App() {
+
+  
+
   return (
     <div className="App">
       
-        <BotCollection/>
-        <MyBotArmy/>
+        <BotCollection />
+       
       
     </div>
   );

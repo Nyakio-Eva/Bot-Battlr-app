@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import YourBotArmy from "./yourbotArmy";
+import Pagination from "./pagination";
 
 
 function BotCollection(){
@@ -7,6 +8,14 @@ function BotCollection(){
     const [bots, setBots] = useState([]);
     const [selectedBot, setSelectedBot]= useState(null);
     const [army, setArmy] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [postsPerPage] = useState(10);
+
+    const indexOfLastPost = currentPage * postsPerPage;
+    const indexOfFirstPost = indexOfLastPost - postsPerPage;
+    const currentPosts = bots.slice(indexOfFirstPost, indexOfLastPost);
+  
+  
 
     
     useEffect(() => {
@@ -67,14 +76,15 @@ function BotCollection(){
         setBots(updatedBots)
     }
     
+    const paginate = (pageNumber) => setCurrentPage(pageNumber)
 
     return(
-        <div>
-          <h1>Bot Collection</h1>
-          <ul>
+        <div className="container mt-5">
+          <h1 className="text-primary mb-3">Bot Collection</h1>
+          <ul className="list-group mb-4">
             {bots.map((bot) =>(
                 <li key={bot.id} onClick={() => handleAddToYourBotArmy(bot)} >
-                    {bot.name}
+                    {bot.name} {currentPosts}
                     
                     <button onClick={() => handleViewProfile(bot)}>view profile</button>
                      
@@ -97,6 +107,12 @@ function BotCollection(){
                 </div>
             )}
             <YourBotArmy army={army} setArmy={setArmy} onDeleteBot={(bot) => deleteBot(bot, handleDeleteBot)}/>
+            <Pagination 
+               postsPerPage={postsPerPage}
+               totalPosts ={bots.length}
+               paginate={paginate}
+               
+            />
         </div>
     )
 }

@@ -1,15 +1,12 @@
-import React, {useState} from 'react';
+import React from 'react';
 import './App.css';
 import BotCollection from './components/Botcollection';
 
 
 
 
-
 function App() {
-
   
-
   return (
     <div className="App">
       

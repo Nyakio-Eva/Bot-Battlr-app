@@ -17,7 +17,7 @@ function YourBotArmy({army, setArmy, onDeleteBot}){
                 <li key={bot.id} >
                     {bot.name}
                     <button onClick={() => handleReleaseBot(bot)}>realease bot</button>
-                    <button onClick={() => onDeleteBot(bot)}>Delete Bot</button>
+                    <button className="btn btn-danger" onClick={() => onDeleteBot(bot)}>X</button>
                 </li>
             ))}
            </ul>

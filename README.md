@@ -11,7 +11,7 @@ Eva Nyakio
 This is a simple web application that lets you see profiles of bots in the Bot Collection among other features. 
 #### Note
 * You can only add a bot once in your bot army
-* Release a bot from  the army by clicking on it 
+* Release a bot from  the army by clicking on the release button 
 * Discharge a bot from their service forever by clicking the red button marked x
 
 ## User stories
@@ -39,16 +39,21 @@ This is a simple web application that lets you see profiles of bots in the Bot C
    * display a list a bots profiles = with buttons: view profile, add bot to your army, and close profile
    * use pagination
 
-- create a MyBotArmy component to render 
+- create a YourBotArmy component to render 
 individual bots selected by user
    
 - Implement functionality to:
-    * add a bot to MyBotArmy component 
+    * add a bot to YourBotArmy component 
     * release a bot from the army
     * delete a bot from the collection
 
 - Add pagination
-  * create pagination component    
+  * create pagination component
+
+
+
+
+
 
                       -----------------------------END-------------------------------------- 
 

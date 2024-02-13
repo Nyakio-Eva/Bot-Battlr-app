@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
 import YourBotArmy from "./yourbotArmy";
 import Pagination from "./pagination";
 
@@ -79,14 +80,14 @@ function BotCollection(){
     const paginate = (pageNumber) => setCurrentPage(pageNumber)
 
     return(
-        <div className="container mt-5">
+        <div className="container mt-5 ">
           <h1 className="text-primary mb-3">Bot Collection</h1>
           <ul className="list-group mb-4">
             {bots.map((bot) =>(
                 <li key={bot.id} onClick={() => handleAddToYourBotArmy(bot)} >
                     {bot.name} {currentPosts.length}
                     
-                    <button onClick={() => handleViewProfile(bot)}>view profile</button>
+                    <button onClick={(e) => {e.stopPropagation(); handleViewProfile(bot)}}>view profile</button>
                      
                    
                 </li>

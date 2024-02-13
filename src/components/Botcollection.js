@@ -95,6 +95,15 @@ function BotCollection(){
                             </li>
                         ))}
                     </ul>
+                    <Pagination
+                        postsPerPage={postsPerPage}
+                        totalPosts={bots.length}
+                        paginate={paginate}
+                    />
+                    <YourBotArmy 
+                    army={army} 
+                    setArmy={setArmy} 
+                    onDeleteBot={(bot) => deleteBot(bot, handleDeleteBot)} />
                 </div>
                 <div className="col-md-4">
                     {selectedBot && (
@@ -111,12 +120,8 @@ function BotCollection(){
                             <button onClick={handleCloseProfile}>Close Profile</button>
                         </div>
                     )}
-                    <YourBotArmy army={army} setArmy={setArmy} onDeleteBot={(bot) => deleteBot(bot, handleDeleteBot)} />
-                    <Pagination
-                        postsPerPage={postsPerPage}
-                        totalPosts={bots.length}
-                        paginate={paginate}
-                    />
+                    
+                    
                 </div>
             </div>
         </div>

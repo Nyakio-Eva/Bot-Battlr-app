@@ -23,7 +23,7 @@ function BotCollection(){
 
     const fetchBotsData = async () => {
         try{
-            const response = await fetch("http://localhost:3000/bots");
+            const response = await fetch("https://json-server-vercel-gray.vercel.app/bots");
                if(!response.ok){
                throw new Error("Error fetching bots data")
             }
@@ -39,7 +39,7 @@ function BotCollection(){
 
     const deleteBot = async (bot, onDeleteBot) => {
         try{
-            const response = await fetch(` http://localhost:3000/bots/${bot.id}`, {
+            const response = await fetch(`https://json-server-vercel-gray.vercel.app/bots/${bot.id}`, {
                 method: "DELETE",
             });
 
